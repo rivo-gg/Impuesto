@@ -1,0 +1,45 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Company {
+  id       String    @id @default(cuid())
+  name     String
+  projects Project[]
+}
+
+model Project {
+  id        String    @id @default(cuid())
+  name      String
+  company   Company   @relation(fields: [companyId], references: [id])
+  companyId String
+  invoices  Invoice[]
+}
+
+model Invoice {
+  id           String   @id @default(cuid())
+  invoiceNumber String  @unique
+  project      Project  @relation(fields: [projectId], references: [id])
+  projectId    String
+  amount       Float
+  date         DateTime
+  status       String
+  pdfContent   String
+
+  InvoiceDetail InvoiceDetail[]
+}
+
+model InvoiceDetail {
+  id        String  @id @default(cuid())
+  invoice   Invoice @relation(fields: [invoiceId], references: [id])
+  invoiceId String
+  category  String
+  quantity  Int
+  unitPrice Float
+}
+
