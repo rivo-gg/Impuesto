@@ -1,122 +1,69 @@
-"use client"
+import Link from "next/link";
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Overview } from "@/components/overview"
-import { RecentInvoices } from "@/components/recent-invoices"
-import { InvoiceModal } from "@/components/invoice-modal"
-import { Button } from "@/components/ui/button"
-// import { CompanySelector } from "@/components/company-selector"
-import { Company, Project, Invoice } from "@/types"
+import { LatestPost } from "@/app/_components/post";
+import { auth } from "@/server/auth";
+import { api, HydrateClient } from "@/trpc/server";
 
-// Mock data
-const projects: Project[] = [
-  { id: "1", name: "Website Redesign", companyId: "1" },
-  { id: "2", name: "Mobile App Development", companyId: "1" },
-  { id: "3", name: "ERP Implementation", companyId: "2" },
-]
+export default async function Home() {
+  const hello = await api.post.hello({ text: "from tRPC" });
+  const session = await auth();
 
-const invoices: Invoice[] = [
-  { id: "1", projectId: "1", amount: 5000, date: new Date(), status: "paid" },
-  { id: "2", projectId: "1", amount: 7500, date: new Date(), status: "pending" },
-  { id: "3", projectId: "2", amount: 10000, date: new Date(), status: "paid" },
-  { id: "4", projectId: "3", amount: 15000, date: new Date(), status: "overdue" },
-]
-
-export default function DashboardPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  // const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
-
-  const filteredProjects = projects
-  const filteredInvoices = invoices
-
-  const totalRevenue = filteredInvoices.reduce((sum, invoice) => sum + invoice.amount, 0)
-  const paidInvoices = filteredInvoices.filter(invoice => invoice.status === "paid")
-  const pendingInvoices = filteredInvoices.filter(invoice => invoice.status === "pending")
+  if (session?.user) {
+    void api.post.getLatest.prefetch();
+  }
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        <Button onClick={() => setIsModalOpen(true)}>Add Invoice</Button>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Revenue
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">€{totalRevenue.toFixed(2)}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Paid Invoices
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{paidInvoices.length}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pending Invoices</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{pendingInvoices.length}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Active Projects
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{filteredProjects.length}</div>
-          </CardContent>
-        </Card>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle>Revenue Overview</CardTitle>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <Overview data={filteredProjects
-              .map(project => ({
-                name: project.name,
-                total: filteredInvoices
-                  .filter(invoice => invoice.projectId === project.id)
-                  .reduce((sum, invoice) => sum + invoice.amount, 0)
-              }))
-              .filter(item => item.total > 0)
-            } />
-          </CardContent>
-        </Card>
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>Recent Invoices</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <RecentInvoices 
-              invoices={filteredInvoices
-                .sort((a, b) => b.date.getTime() - a.date.getTime())
-                .slice(0, 5)
-              } 
-            />
-          </CardContent>
-        </Card>
-      </div>
-      <InvoiceModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        projects={filteredProjects}
-      />
-    </div>
-  )
-}
+    <HydrateClient>
+      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
+          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
+          </h1>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+            <Link
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
+              href="https://create.t3.gg/en/usage/first-steps"
+              target="_blank"
+            >
+              <h3 className="text-2xl font-bold">First Steps →</h3>
+              <div className="text-lg">
+                Just the basics - Everything you need to know to set up your
+                database and authentication.
+              </div>
+            </Link>
+            <Link
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
+              href="https://create.t3.gg/en/introduction"
+              target="_blank"
+            >
+              <h3 className="text-2xl font-bold">Documentation →</h3>
+              <div className="text-lg">
+                Learn more about Create T3 App, the libraries it uses, and how
+                to deploy it.
+              </div>
+            </Link>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-2xl text-white">
+              {hello ? hello.greeting : "Loading tRPC query..."}
+            </p>
 
+            <div className="flex flex-col items-center justify-center gap-4">
+              <p className="text-center text-2xl text-white">
+                {session && <span>Logged in as {session.user?.name}</span>}
+              </p>
+              <Link
+                href={session ? "/api/auth/signout" : "/api/auth/signin"}
+                className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
+              >
+                {session ? "Sign out" : "Sign in"}
+              </Link>
+            </div>
+          </div>
+
+          {session?.user && <LatestPost />}
+        </div>
+      </main>
+    </HydrateClient>
+  );
+}
