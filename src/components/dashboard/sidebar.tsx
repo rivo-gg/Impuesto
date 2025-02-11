@@ -1,9 +1,5 @@
 "use client";
 
-import * as React from "react";
-import NavMain from "@/components/dashboard/nav-main";
-import NavUser from "@/components/dashboard/nav-user";
-import CompanySwitcher from "@/components/dashboard/company-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -23,6 +19,10 @@ import {
   BarChart,
   Settings,
 } from "lucide-react";
+import CompanySwitcher from "@/components/dashboard/company-switcher";
+import NavMain from "@/components/dashboard/nav-main";
+import NavUser from "@/components/dashboard/nav-user";
+import * as React from "react";
 
 const data = {
   user: {
@@ -97,24 +97,22 @@ const data = {
   ],
 };
 
-export function DashboardSidebar({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
+export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton size="lg" asChild>
-            <h2 className="font-bold text-lg">
-            <span className="hidden group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:w-full group-data-[collapsible=icon]:h-full">
-                ID
-              </span>
-              <span className="group-data-[collapsible=icon]:hidden">Impuesto Dashboard</span>
-            </h2>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <h2 className="text-lg font-bold">
+                <span className="hidden group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:h-full group-data-[collapsible=icon]:w-full group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
+                  ID
+                </span>
+                <span className="group-data-[collapsible=icon]:hidden">Impuesto Dashboard</span>
+              </h2>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
         <CompanySwitcher companies={data.companies} />
       </SidebarHeader>
       <SidebarContent>
