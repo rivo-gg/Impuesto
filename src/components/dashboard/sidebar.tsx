@@ -10,6 +10,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
@@ -102,7 +103,18 @@ export function DashboardSidebar({
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-      <h2 className="font-bold text-lg">Impuesto</h2>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton size="lg" asChild>
+            <h2 className="font-bold text-lg">
+            <span className="hidden group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:w-full group-data-[collapsible=icon]:h-full">
+                ID
+              </span>
+              <span className="group-data-[collapsible=icon]:hidden">Impuesto Dashboard</span>
+            </h2>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
         <CompanySwitcher companies={data.companies} />
       </SidebarHeader>
       <SidebarContent>
