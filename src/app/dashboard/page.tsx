@@ -21,11 +21,7 @@ export default function Dashboard() {
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
+             </BreadcrumbList>
           </Breadcrumb>
         </div>
       </header>
