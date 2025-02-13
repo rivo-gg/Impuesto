@@ -13,10 +13,8 @@ import { DatePicker } from "@/components/ui/date-picker"
 export function DateRangePicker({
   className,
   date,
-  setDate,
 }: React.HTMLAttributes<HTMLDivElement> & {
   date: DateRange | undefined
-  setDate: (date: DateRange | undefined) => void
 }) {
   return (
     <div className={cn("grid gap-2", className)}>

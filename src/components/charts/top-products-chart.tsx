@@ -1,16 +1,15 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
+import ChartTooltip from "@/components/ui/chart-tooltip"
 
 const data = [
-  { name: "Jan", revenue: 4000 },
-  { name: "Feb", revenue: 3000 },
-  { name: "Mar", revenue: 5000 },
-  { name: "Apr", revenue: 2780 },
-  { name: "May", revenue: 1890 },
-  { name: "Jun", revenue: 2390 },
-  { name: "Jul", revenue: 3490 },
+  { name: "Product A", revenue: 4000 },
+  { name: "Product B", revenue: 3000 },
+  { name: "Product C", revenue: 2000 },
+  { name: "Product D", revenue: 2780 },
+  { name: "Product E", revenue: 1890 },
 ]
 
-export function RevenueChart() {
+export function TopProductsChart() {
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data}>
@@ -22,7 +21,7 @@ export function RevenueChart() {
           axisLine={false}
           tickFormatter={(value) => `€${value}`}
         />
-        <Tooltip />
+        <Tooltip content={<ChartTooltip />} />
         <Bar dataKey="revenue" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
