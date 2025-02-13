@@ -62,6 +62,7 @@ export default function Settings() {
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
               </BreadcrumbItem>
+              <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="/dashboard/settings">Settings</BreadcrumbLink>
               </BreadcrumbItem>
