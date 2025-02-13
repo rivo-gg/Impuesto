@@ -1,18 +1,5 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Save } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,9 +7,35 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Separator } from "@/components/ui/separator";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useForm } from "react-hook-form";
+import { Save } from "lucide-react";
+import { useState } from "react";
+import { z } from "zod";
 
 const formSchema = z.object({
   companyName: z.string().min(2, {
@@ -32,11 +45,11 @@ const formSchema = z.object({
     message: "Please enter a valid email address.",
   }),
   currency: z.string(),
-})
+});
 
 export default function Settings() {
-  const [emailNotifications, setEmailNotifications] = useState(true)
-  const [weeklyReports, setWeeklyReports] = useState(false)
+  const [emailNotifications, setEmailNotifications] = useState(true);
+  const [weeklyReports, setWeeklyReports] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,10 +58,10 @@ export default function Settings() {
       email: "admin@acme.com",
       currency: "EUR",
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    console.log(values);
   }
 
   return (
@@ -158,7 +171,9 @@ export default function Settings() {
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
                     <Label htmlFor="email-notifications">Email Notifications</Label>
-                    <p className="text-sm text-muted-foreground">Receive notifications via email.</p>
+                    <p className="text-muted-foreground text-sm">
+                      Receive notifications via email.
+                    </p>
                   </div>
                   <Switch
                     id="email-notifications"
@@ -169,9 +184,13 @@ export default function Settings() {
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
                     <Label htmlFor="weekly-reports">Weekly Reports</Label>
-                    <p className="text-sm text-muted-foreground">Receive weekly summary reports.</p>
+                    <p className="text-muted-foreground text-sm">Receive weekly summary reports.</p>
                   </div>
-                  <Switch id="weekly-reports" checked={weeklyReports} onCheckedChange={setWeeklyReports} />
+                  <Switch
+                    id="weekly-reports"
+                    checked={weeklyReports}
+                    onCheckedChange={setWeeklyReports}
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -179,6 +198,5 @@ export default function Settings() {
         </div>
       </div>
     </SidebarInset>
-  )
+  );
 }
-

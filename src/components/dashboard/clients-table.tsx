@@ -1,15 +1,15 @@
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableRow } from "@/components/ui/table";
 
 interface Client {
-    id: string
-    name: string
-    email: string
-    type: "b2c" | "b2b"
-    company?: string
+  id: string;
+  name: string;
+  email: string;
+  type: "b2c" | "b2b";
+  company?: string;
 }
 
 interface ClientsTableProps {
-  clients: Client[]
+  clients: Client[];
 }
 
 export function ClientsTable({ clients }: ClientsTableProps) {
@@ -34,6 +34,5 @@ export function ClientsTable({ clients }: ClientsTableProps) {
         ))}
       </TableBody>
     </Table>
-  )
+  );
 }
-

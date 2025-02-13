@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const data = [
   { name: "Project A", revenue: 4000 },
@@ -8,7 +8,7 @@ const data = [
   { name: "Project C", revenue: 2000 },
   { name: "Project D", revenue: 2780 },
   { name: "Project E", revenue: 1890 },
-]
+];
 
 export function TopProjectsChart() {
   return (
@@ -21,6 +21,5 @@ export function TopProjectsChart() {
         <Bar dataKey="revenue" fill="hsl(var(--primary))" />
       </BarChart>
     </ResponsiveContainer>
-  )
+  );
 }
-

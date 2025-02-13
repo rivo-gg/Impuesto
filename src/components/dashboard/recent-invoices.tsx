@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const recentInvoices = [
   {
@@ -31,7 +31,7 @@ const recentInvoices = [
     customer: "Bob Williams",
     email: "bob.williams@example.com",
   },
-]
+];
 
 export function RecentInvoices() {
   return (
@@ -48,13 +48,12 @@ export function RecentInvoices() {
             </AvatarFallback>
           </Avatar>
           <div className="ml-4 space-y-1">
-            <p className="text-sm font-medium leading-none">{invoice.customer}</p>
-            <p className="text-sm text-muted-foreground">{invoice.email}</p>
+            <p className="text-sm leading-none font-medium">{invoice.customer}</p>
+            <p className="text-muted-foreground text-sm">{invoice.email}</p>
           </div>
           <div className="ml-auto font-medium">+€{invoice.amount.toFixed(2)}</div>
         </div>
       ))}
     </div>
-  )
+  );
 }
-

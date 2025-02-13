@@ -1,6 +1,15 @@
-"use client"
+"use client";
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const data = [
   { name: "Jan", currentYear: 4000, previousYear: 2400 },
@@ -10,7 +19,7 @@ const data = [
   { name: "May", currentYear: 1890, previousYear: 4800 },
   { name: "Jun", currentYear: 2390, previousYear: 3800 },
   { name: "Jul", currentYear: 3490, previousYear: 4300 },
-]
+];
 
 export function MonthlyComparisonChart() {
   return (
@@ -25,6 +34,5 @@ export function MonthlyComparisonChart() {
         <Line type="monotone" dataKey="previousYear" stroke="#82ca9d" />
       </LineChart>
     </ResponsiveContainer>
-  )
+  );
 }
-

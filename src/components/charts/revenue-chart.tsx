@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
 
 const data = [
   { name: "Jan", revenue: 4000 },
@@ -10,7 +10,7 @@ const data = [
   { name: "May", revenue: 1890 },
   { name: "Jun", revenue: 2390 },
   { name: "Jul", revenue: 3490 },
-]
+];
 
 export function RevenueChart() {
   return (
@@ -28,6 +28,5 @@ export function RevenueChart() {
         <Bar dataKey="revenue" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
-  )
+  );
 }
-
