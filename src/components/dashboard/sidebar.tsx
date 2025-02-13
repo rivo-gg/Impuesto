@@ -86,11 +86,11 @@ const data = {
       items: [
         {
           title: "Profile",
-          url: "/dashboard/profile",
+          url: "/dashboard/settings/profile",
         },
         {
           title: "General",
-          url: "/dashboard/settings",
+          url: "/dashboard/settings/general",
         },
       ],
     },
