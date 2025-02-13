@@ -1,19 +1,24 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Overview } from "@/components/dashboard/overview"
-import { RecentInvoices } from "@/components/dashboard/recent-invoices"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb"
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { Separator } from "@/components/ui/separator"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+} from "@/components/ui/breadcrumb";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RecentInvoices } from "@/components/dashboard/recent-invoices";
+import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { Overview } from "@/components/dashboard/overview";
+import { Separator } from "@/components/ui/separator";
 
 // Helper function to determine the color class based on the percentage
 function getPercentageColorClass(percentage: number): string {
-  return percentage >= 0 ? "text-green-500" : "text-red-500"
+  return percentage >= 0 ? "text-green-500" : "text-red-500";
 }
 
 // Helper function to format the percentage
 function formatPercentage(percentage: number): string {
-  const sign = percentage >= 0 ? "+" : ""
-  return `${sign}${percentage.toFixed(1)}%`
+  const sign = percentage >= 0 ? "+" : "";
+  return `${sign}${percentage.toFixed(1)}%`;
 }
 
 export default function Dashboard() {
@@ -23,7 +28,7 @@ export default function Dashboard() {
     { title: "Invoices", value: "+2,350", percentage: 180.1 },
     { title: "Paid Invoices", value: "+12,234", percentage: 19.0 },
     { title: "Active Projects", value: "+573", percentage: -2.5 },
-  ]
+  ];
 
   return (
     <SidebarInset>
@@ -41,7 +46,6 @@ export default function Dashboard() {
         </div>
       </header>
       <div className="flex flex-1 flex-col gap-4 p-4">
-        {" "}
         {/* Updated main content container */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {cardData.map((card, index) => (
@@ -51,7 +55,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{card.value}</div>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-muted-foreground text-xs">
                   <span className={`font-medium ${getPercentageColorClass(card.percentage)}`}>
                     {formatPercentage(card.percentage)}
                   </span>
@@ -81,6 +85,5 @@ export default function Dashboard() {
         </div>
       </div>
     </SidebarInset>
-  )
+  );
 }
-

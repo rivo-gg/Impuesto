@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
       <SidebarProvider>
         <DashboardSidebar />
-        <main>{children}</main>
+        {children}
       </SidebarProvider>
     </ThemeProvider>
   );

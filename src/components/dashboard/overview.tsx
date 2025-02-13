@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
-import ChartTooltip from "@/components/ui/chart-tooltip"
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
+import ChartTooltip from "@/components/ui/chart-tooltip";
 
 const data = [
   { name: "Jan", total: 4000 },
@@ -16,7 +16,7 @@ const data = [
   { name: "Oct", total: 2000 },
   { name: "Nov", total: 3000 },
   { name: "Dec", total: 5000 },
-]
+];
 
 export function Overview() {
   return (
@@ -34,6 +34,5 @@ export function Overview() {
         <Bar dataKey="total" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
-  )
+  );
 }
-
