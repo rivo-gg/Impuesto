@@ -1,21 +1,13 @@
 "use client";
 
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationLink,
 } from "@/components/ui/pagination";
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { ClientsTable } from "@/components/dashboard/clients-table";
+import { PageWrapper } from "@/components/dashboard/page-wrapper";
 import { ClientModal } from "@/components/client-modal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -87,21 +79,7 @@ export default function Clients() {
   const totalPages = Math.ceil(filteredClients.length / itemsPerPage);
 
   return (
-    <SidebarInset className="flex h-screen flex-col">
-      <header className="flex h-16 shrink-0 items-center border-b px-4">
-        <SidebarTrigger className="mr-2 -ml-1" />
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem className="hidden md:inline-flex">
-              <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="hidden md:inline-flex" />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Clients</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </header>
+    <PageWrapper>
       <div className="flex flex-grow flex-col space-y-6 overflow-hidden p-6">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold tracking-tight">Clients</h1>
@@ -141,6 +119,6 @@ export default function Clients() {
         onClose={() => setIsModalOpen(false)}
         onAddClient={addClient}
       />
-    </SidebarInset>
+    </PageWrapper>
   );
 }

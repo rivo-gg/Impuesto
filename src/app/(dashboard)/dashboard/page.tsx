@@ -1,14 +1,7 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-} from "@/components/ui/breadcrumb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RecentInvoices } from "@/components/dashboard/recent-invoices";
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { PageWrapper } from "@/components/dashboard/page-wrapper";
 import { Overview } from "@/components/dashboard/overview";
-import { Separator } from "@/components/ui/separator";
 
 // Helper function to determine the color class based on the percentage
 function getPercentageColorClass(percentage: number): string {
@@ -31,20 +24,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <SidebarInset>
-      <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-        <div className="flex items-center gap-2 px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </header>
+    <PageWrapper>
       <div className="flex flex-1 flex-col gap-4 p-4">
         {/* Updated main content container */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -84,6 +64,6 @@ export default function Dashboard() {
           </Card>
         </div>
       </div>
-    </SidebarInset>
+    </PageWrapper>
   );
 }

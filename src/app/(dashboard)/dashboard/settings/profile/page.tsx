@@ -1,11 +1,5 @@
 "use client"
 
-import { useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Save } from 'lucide-react'
-import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -15,22 +9,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { Separator } from "@/components/ui/separator"
+import { Input } from "@/components/ui/input"
+import { useToast } from "@/hooks/use-toast"
+import { useForm } from "react-hook-form"
+import { useState } from "react"
+import { z } from "zod"
+import { PageWrapper } from "@/components/dashboard/page-wrapper"
 
 const profileFormSchema = z.object({
   username: z
@@ -88,42 +78,27 @@ export default function ProfileSettingsPage() {
   }
 
   return (
-    <SidebarInset>
-      <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-        <div className="flex items-center gap-2 px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/dashboard/settings">Settings</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Profile</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </header>
+    <PageWrapper>
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <h1 className="text-3xl font-bold tracking-tight">Profile Settings</h1>
         <div className="grid gap-6">
           <Card>
             <CardHeader>
               <CardTitle>Profile Information</CardTitle>
-              <CardDescription>Update your profile information and manage your account settings.</CardDescription>
+              <CardDescription>
+                Update your profile information and manage your account settings.
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center space-x-4 mb-6">
-                <Avatar className="w-20 h-20">
+              <div className="mb-6 flex items-center space-x-4">
+                <Avatar className="h-20 w-20">
                   <AvatarImage src={avatar} alt="Profile picture" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
-                <Button variant="outline" onClick={() => setAvatar("/placeholder.svg?height=80&width=80")}>
+                <Button
+                  variant="outline"
+                  onClick={() => setAvatar("/placeholder.svg?height=80&width=80")}
+                >
                   Change Avatar
                 </Button>
               </div>
@@ -175,7 +150,8 @@ export default function ProfileSettingsPage() {
                           />
                         </FormControl>
                         <FormDescription>
-                          You can <span>@mention</span> other users and organizations to link to them.
+                          You can <span>@mention</span> other users and organizations to link to
+                          them.
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -189,7 +165,10 @@ export default function ProfileSettingsPage() {
                         checked={emailNotifications}
                         onCheckedChange={setEmailNotifications}
                       />
-                      <label htmlFor="email-notifications" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                      <label
+                        htmlFor="email-notifications"
+                        className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
                         Receive email notifications
                       </label>
                     </div>
@@ -201,6 +180,6 @@ export default function ProfileSettingsPage() {
           </Card>
         </div>
       </div>
-    </SidebarInset>
-  )
+    </PageWrapper>
+  );
 }
