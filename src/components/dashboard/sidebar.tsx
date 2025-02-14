@@ -99,29 +99,29 @@ const data = {
 
 export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+    <Sidebar collapsible="icon" {...props} className="border-dashed">
+      <SidebarHeader className="gap-0 flex shrink-0 h-16 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <h2 className="text-lg font-bold">
+              {/* <h2 className="text-lg font-bold">
                 <span className="hidden group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:h-full group-data-[collapsible=icon]:w-full group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
                   ID
                 </span>
                 <span className="group-data-[collapsible=icon]:hidden">Impuesto Dashboard</span>
-              </h2>
+              </h2> */}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
         <CompanySwitcher companies={data.companies} />
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="border-y border-dashed">
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
-      <SidebarRail />
+      {/* <SidebarRail /> */}
     </Sidebar>
   );
 }
