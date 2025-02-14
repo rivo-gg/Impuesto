@@ -1,10 +1,13 @@
 "use client";
 
-import { RevenueBySourceChart } from "@/components/charts/revenue-by-source-chart";
-import { RevenueChart } from "@/components/charts/revenue-chart";
-import { TopProductsChart } from "@/components/charts/top-products-chart";
-import { DateRangePicker } from "@/components/date-range-picker";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -12,6 +15,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RevenueBySourceChart } from "@/components/charts/revenue-by-source-chart";
+import { TopProductsChart } from "@/components/charts/top-products-chart";
+import { RevenueChart } from "@/components/charts/revenue-chart";
+import { DateRangePicker } from "@/components/date-range-picker";
+import { TrendingUp } from "lucide-react";
 import { useState } from "react";
 
 export default function RevenuePage() {
@@ -74,8 +82,8 @@ export default function RevenuePage() {
           </CardContent>
         </Card>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
+      <div className="grid gap-4 xl:grid-cols-7">
+        <Card className="xl:col-span-4">
           <CardHeader>
             <CardTitle>Revenue Over Time</CardTitle>
           </CardHeader>
@@ -83,13 +91,21 @@ export default function RevenuePage() {
             <RevenueChart />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="xl:col-span-3">
           <CardHeader>
             <CardTitle>Revenue by Source</CardTitle>
           </CardHeader>
           <CardContent>
             <RevenueBySourceChart />
           </CardContent>
+          <CardFooter className="flex-col gap-2 text-sm">
+            <div className="flex items-center gap-2 leading-none font-medium">
+              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+            </div>
+            <div className="text-muted-foreground leading-none">
+              Showing total visitors for the last 6 months
+            </div>
+          </CardFooter>
         </Card>
       </div>
       <Card>

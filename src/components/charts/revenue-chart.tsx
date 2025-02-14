@@ -1,4 +1,6 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
+import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart";
+import CustomChartTooltip from "@/components/ui/chart-tooltip";
 
 const data = [
   { name: "Jan", revenue: 4000 },
@@ -8,11 +10,18 @@ const data = [
   { name: "May", revenue: 1890 },
   { name: "Jun", revenue: 2390 },
   { name: "Jul", revenue: 3490 },
-]
+];
+
+const chartConfig = {
+  revenue: {
+    label: "Revenue",
+    color: "hsl(var(--chart-2))",
+  },
+} satisfies ChartConfig;
 
 export function RevenueChart() {
   return (
-    <ResponsiveContainer width="100%" height={350}>
+    <ChartContainer config={chartConfig} className="w-full">
       <BarChart data={data}>
         <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
         <YAxis
@@ -22,10 +31,9 @@ export function RevenueChart() {
           axisLine={false}
           tickFormatter={(value) => `€${value}`}
         />
-        <Tooltip />
-        <Bar dataKey="revenue" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+        <ChartTooltip content={<CustomChartTooltip />} />
+        <Bar dataKey="revenue" stackId="a" fill="var(--color-revenue)" radius={[4, 4, 0, 0]} />
       </BarChart>
-    </ResponsiveContainer>
-  )
+    </ChartContainer>
+  );
 }
-

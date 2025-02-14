@@ -1,7 +1,8 @@
 "use client";
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
-import ChartTooltip from "@/components/ui/chart-tooltip";
+import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart";
+import { Bar, BarChart, XAxis, YAxis } from "recharts";
+import CustomChartTooltip from "../ui/chart-tooltip";
 
 const data = [
   { name: "Jan", total: 4000 },
@@ -18,10 +19,17 @@ const data = [
   { name: "Dec", total: 5000 },
 ];
 
+const chartConfig = {
+  total: {
+    label: "Total",
+    color: "hsl(var(--chart-1))",
+  },
+} satisfies ChartConfig;
+
 export function Overview() {
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data}>
+    <ChartContainer config={chartConfig} className="w-full">
+      <BarChart accessibilityLayer data={data}>
         <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
         <YAxis
           stroke="#888888"
@@ -30,9 +38,9 @@ export function Overview() {
           axisLine={false}
           tickFormatter={(value) => `€${value}`}
         />
-        <Tooltip content={<ChartTooltip />} />
-        <Bar dataKey="total" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+        <ChartTooltip content={<CustomChartTooltip />} />
+        <Bar dataKey="total" stackId="a" fill="var(--color-total)" radius={[4, 4, 0, 0]} />
       </BarChart>
-    </ResponsiveContainer>
+    </ChartContainer>
   );
 }
