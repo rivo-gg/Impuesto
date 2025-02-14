@@ -99,8 +99,8 @@ const data = {
 
 export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props} className="border-dashed">
-      <SidebarHeader className="gap-0 flex shrink-0 h-16 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+    <Sidebar collapsible="icon" className="border-dashed" {...props}>
+      <SidebarHeader className="flex h-16 shrink-0 gap-0 border-b border-dashed transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
@@ -115,10 +115,10 @@ export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sideb
         </SidebarMenu>
         <CompanySwitcher companies={data.companies} />
       </SidebarHeader>
-      <SidebarContent className="border-y border-dashed">
+      <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="border-t border-dashed">
         <NavUser user={data.user} />
       </SidebarFooter>
       {/* <SidebarRail /> */}

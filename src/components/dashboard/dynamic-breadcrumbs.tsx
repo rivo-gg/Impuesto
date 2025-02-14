@@ -10,13 +10,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
-const formatSegment = (segment: string) => {
-  return segment
-    .replace(/-/g, " ")
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
 
 export default function DynamicBreadcrumbs() {
   const pathname = usePathname();
@@ -27,16 +20,19 @@ export default function DynamicBreadcrumbs() {
       <BreadcrumbList>
         {segments.map((segment, index) => (
           <Fragment key={segment}>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
+            <BreadcrumbItem className="capitalize">
               {index === segments.length - 1 ? (
-                <BreadcrumbPage>{formatSegment(segment)}</BreadcrumbPage>
+                <BreadcrumbPage>{segment}</BreadcrumbPage>
               ) : (
-                <BreadcrumbLink href={`/${segments.slice(0, index + 1).join("/")}`}>
-                  {formatSegment(segment)}
+                <BreadcrumbLink
+                  href={`/${segments.slice(0, index + 1).join("/")}`}
+                  className="hover:bg-sidebar-accent -mx-1.5 rounded-md px-1.5 py-1"
+                >
+                  {segment}
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
+            {index !== segments.length - 1 && <BreadcrumbSeparator className="h-4" />}
           </Fragment>
         ))}
       </BreadcrumbList>
