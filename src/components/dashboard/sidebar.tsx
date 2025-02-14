@@ -20,8 +20,8 @@ import {
   Settings,
 } from "lucide-react";
 import CompanySwitcher from "@/components/dashboard/company-switcher";
+import NavUser from "@/components/dashboard/user-menu";
 import NavMain from "@/components/dashboard/nav-main";
-import NavUser from "@/components/dashboard/nav-user";
 import * as React from "react";
 
 const data = {
@@ -104,22 +104,22 @@ export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sideb
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              {/* <h2 className="text-lg font-bold">
+              <h2 className="text-lg font-bold">
                 <span className="hidden group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:h-full group-data-[collapsible=icon]:w-full group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
                   ID
                 </span>
                 <span className="group-data-[collapsible=icon]:hidden">Impuesto Dashboard</span>
-              </h2> */}
+              </h2>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-        <CompanySwitcher companies={data.companies} />
+        {/* <CompanySwitcher companies={data.companies} /> */}
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter className="border-t border-dashed">
-        <NavUser user={data.user} />
+        <CompanySwitcher companies={data.companies} />
       </SidebarFooter>
       {/* <SidebarRail /> */}
     </Sidebar>
