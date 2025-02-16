@@ -13,10 +13,10 @@ export default function Analytics() {
   const [dateRange, setDateRange] = useState({ from: new Date(2023, 0, 1), to: new Date() });
 
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4">
+    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">Analytics</h1>
-        <DateRangePicker date={dateRange} />
+        <DateRangePicker date={dateRange} setDate={setDateRange} />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
@@ -64,45 +64,23 @@ export default function Analytics() {
         </TabsList>
         <TabsContent value="overview" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Card className="col-span-4">
-              <CardHeader>
-                <CardTitle>Revenue Overview</CardTitle>
-              </CardHeader>
-              <CardContent className="pl-2">
-                <RevenueChart />
-              </CardContent>
-            </Card>
-            <Card className="col-span-3">
-              <CardHeader>
-                <CardTitle>Invoice Status</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <InvoiceStatusChart />
-              </CardContent>
-            </Card>
+            <div className="col-span-4">
+              <RevenueChart />
+            </div>
+            <div className="col-span-3">
+              <InvoiceStatusChart />
+            </div>
           </div>
         </TabsContent>
         <TabsContent value="invoices" className="space-y-4">
-          <Card className="col-span-4">
-            <CardHeader>
-              <CardTitle>Monthly Comparison</CardTitle>
-              <CardDescription>Compare invoice totals month by month</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <MonthlyComparisonChart />
-            </CardContent>
-          </Card>
+          <div className="col-span-4">
+            <MonthlyComparisonChart />
+          </div>
         </TabsContent>
         <TabsContent value="projects" className="space-y-4">
-          <Card className="col-span-4">
-            <CardHeader>
-              <CardTitle>Top Projects</CardTitle>
-              <CardDescription>Highest revenue generating projects</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <TopProjectsChart />
-            </CardContent>
-          </Card>
+          <div className="col-span-4">
+            <TopProjectsChart />
+          </div>
         </TabsContent>
       </Tabs>
     </div>

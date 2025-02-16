@@ -3,8 +3,8 @@
 import { RevenueBySourceChart } from "@/components/charts/revenue-by-source-chart";
 import { RevenueChart } from "@/components/charts/revenue-chart";
 import { TopProductsChart } from "@/components/charts/top-products-chart";
-import { DateRangePicker } from "@/components/date-range-picker";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { DateRangePicker } from "@/components/ui/date-range-picker";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -13,9 +13,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import { DateRange } from "react-day-picker";
 
 export default function RevenuePage() {
-  const [dateRange, setDateRange] = useState({ from: new Date(2023, 0, 1), to: new Date() });
+  const [dateRange, setDateRange] = useState<DateRange | undefined>({ 
+    from: new Date(2023, 0, 1), 
+    to: new Date() 
+  });
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -33,9 +37,10 @@ export default function RevenuePage() {
               <SelectItem value="product-c">Product C</SelectItem>
             </SelectContent>
           </Select>
-          <DateRangePicker date={dateRange} />
+          <DateRangePicker date={dateRange} setDate={setDateRange} />
         </div>
       </div>
+      
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -74,35 +79,17 @@ export default function RevenuePage() {
           </CardContent>
         </Card>
       </div>
+      
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle>Revenue Over Time</CardTitle>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <RevenueChart />
-          </CardContent>
-        </Card>
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>Revenue by Source</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <RevenueBySourceChart />
-          </CardContent>
-        </Card>
+        <div className="col-span-4">
+          <RevenueChart />
+        </div>
+        <div className="col-span-3">
+          <RevenueBySourceChart />
+        </div>
       </div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Top Products by Revenue</CardTitle>
-          <CardDescription>
-            A breakdown of the top-selling products and their revenue contribution.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <TopProductsChart />
-        </CardContent>
-      </Card>
+      
+      <TopProductsChart />
     </div>
   );
 }
